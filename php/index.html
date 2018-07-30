@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>biaoge</title>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.js"></script>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/jquery.js"></script>
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
 <body>
   <style>
@@ -167,4 +168,11 @@
       </table>
     </div> 
 </body>
+
+<script>
+  $.get('http://demo.com/shop.php', function(res) {
+    res = $.parseJSON(res);
+    console.log(res);
+  })
+</script>
 </html>
