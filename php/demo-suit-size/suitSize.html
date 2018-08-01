@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>biaoge</title>
+  <meta charset="UTF-8">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <form class="col-md-6 size-form">
+              <div class="form-group">
+                <label for="chest">胸围</label>
+                <input type="text" class="form-control" id="chest" placeholder="请输入胸围" name="chest">
+              </div>
+              <div class="form-group">
+                <label for="wasit">腰围</label>
+                <input type="text" class="form-control" id="wasit" placeholder="请输入腰围" name="wasit">
+              </div>
+              <div class="form-group">
+                <label for="shoudler">肩宽</label>
+                <input type="text" class="form-control" id="shoudler" placeholder="请输入肩宽" name="shoudler">
+              </div>
+              <button type="button" class="btn btn-default save-btn">提交</button>
+            </form>
+        </div>
+
+        <div class="well" style="margin-top: 20px;display: none;"></div>
+    </div>
+</body>
+
+<script>
+    $('.save-btn').on('click', function() {
+      $.post("/suit/size", $('.size-form').serialize(), function(res) {
+        res = $.parseJSON(res);
+          if (res.code == 200) {
+            var html = '';
+            $.each(res.data, function(k ,v) {
+              $.each(v, function(kk ,vv) {
+                html += "<p>"+kk+":"+vv+"</p>";
+              })
+            })
+            $(".well").html(html).show();
+          } else {
+            $(".well").html("<p>"+res.msg+"</p>").show();
+          }
+      })
+    })
+</script>
+
+</html>

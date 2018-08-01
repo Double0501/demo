@@ -1,0 +1,12 @@
+{
+  "require": {
+    "phpoffice/phpexcel" : "~1.8.0",
+    "symfony/var-dumper": "~3.3"
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  }
+}

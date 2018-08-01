@@ -90,6 +90,9 @@ switch ($_SERVER['REQUEST_URI']) {
             echo "<script>alert('您输入的用户名不存在');location='/dl.html'</script>";
             exit;
         }
+    case '/suit/size':
+        require("demo-suit-size/suitSize.php");
+        exit;
     default:
         echo "找不到页面";
         break;
