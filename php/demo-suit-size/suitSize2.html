@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>biaoge</title>
+  <meta charset="UTF-8">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <form class="col-md-6 size-form">
+<label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="hipline"> 臀围无省
+</label>
+<label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="hipline1"> 臀围1省
+</label>   
+<label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="hipline2"> 臀围2省
+</label>
+              <div class="form-group">
+                <label for="chest">臀围</label>
+                <input type="text" class="form-control" id="hipline" placeholder="请输入臀围" name="hipline">
+              </div>
+              <div class="form-group">
+                <label for="wasit">腰围</label>
+                <input type="text" class="form-control" id="waistline" placeholder="请输入裤腰" name="waistline">
+              </div>
+              <button type="button" class="btn btn-default save-btn">提交</button>
+            </form>
+        </div>
+        <div class="well" style="margin-top: 20px;display: none;"></div>
+    </div>
+</body>
+<script>
+    $('.save-btn').on('click', function() {
+      $.post("/suit/size2", $('.size-form').serialize(), function(res) {
+        res = $.parseJSON(res);
+          if (res.code == 200) {
+            var html = '';
+            $.each(res.data, function(k ,v) {
+              $.each(v, function(kk ,vv) {
+                html += "<p>"+kk+":"+vv+"</p>";
+              })
+            })
+            $(".well").html(html).show();
+          } else {
+            $(".well").html("<p>"+res.msg+"</p>").show();
+          }
+      })
+    })
+</script>
+
+</html>
