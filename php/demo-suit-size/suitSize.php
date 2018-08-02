@@ -1,36 +1,10 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
+require __DIR__."/Excel.php";
 
-$objPHPExcel = \PHPExcel_IOFactory::load(__DIR__."/suit.xlsx");
-$objWorksheet = $objPHPExcel->getActiveSheet();
-$highestRow = $objWorksheet->getHighestRow(); 
-
-$highestColumn = $objWorksheet->getHighestColumn();
-$highestColumnIndex = \PHPExcel_Cell::columnIndexFromString($highestColumn);  
-
-$strs = [];
-for ($col = 0;$col < $highestColumnIndex;$col++)
-{
-     $fieldTitle = $objWorksheet->getCellByColumnAndRow($col, 1)->getValue();
-     if (trim($fieldTitle) == "") continue;
-
-     $strs[$col] = $fieldTitle."";
-}
-$excelField = $strs;
-
-$sizeTable = [];
-for ($row = 2;$row <= $highestRow;$row++) 
-{   
-    $strs = array();
-    for ($col = 0;$col < $highestColumnIndex;$col++)
-    {
-         $infoData = $objWorksheet->getCellByColumnAndRow($col, $row)->getFormattedValue();
-         $strs[$col] = $infoData."";
-         unset($infoData);
-    }
-
-    $sizeTable[$row] = $strs;
-}
+$excel = new Excel(__DIR__."/suit.xlsx");
+$excelField = $excel->getExcelField();
+$sizeTable = $excel->getSizeTable();
 
 $indexs = [];
 foreach ($excelField as $key => $val) {
